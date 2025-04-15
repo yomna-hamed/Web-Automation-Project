@@ -1,0 +1,6 @@
+{
+  "existed-text1" : "blue",
+  "existed-text2" : "blu",
+  "non-existed-Text" : "hello",
+  "invalid-text-length" : "bl"
+}

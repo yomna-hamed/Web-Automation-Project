@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Demo Web Shop">
+    <test name="Funational Test for each page">
+        <classes>
+            <class name="Tests.RegisterTest"></class>
+            <class name="Tests.LoginTest"></class>
+            <class name="Tests.HomeTest"></class>
+            <class name="Tests.ShoppingCartTest"></class>
+            <class name="Tests.CheckOutTest"></class>
+        </classes>
+    </test>
+    <test name="End To End Scenario Test">
+        <classes>
+            <class name="Tests.E2ETest"></class>
+        </classes>
+    </test>
+</suite>

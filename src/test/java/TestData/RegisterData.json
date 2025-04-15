@@ -1,0 +1,32 @@
+{ "RegisterData" :
+  {
+    "validInputsForRegisterTC" : {
+      "firstname" : "Yomna",
+      "lastname" : "Hamed" ,
+      "password" : "1234567" ,
+      "confirmedpass" : "1234567"
+    },
+
+    "invalidPasswordLength" : {
+      "firstname" : "_Ali",
+      "lastname" : "Mohamed2" ,
+      "password" : "1" ,
+      "confirmedpass" : "1"
+    },
+
+    "confirmedPasswordDoesNotMatch" : {
+      "firstname" : "H",
+      "lastname" : "H" ,
+      "password" : "1234567" ,
+      "confirmedpass" : "1"
+    },
+
+    "leaveFirstNameFieldEmpty" : {
+      "firstname" : "",
+      "lastname" : "H" ,
+      "password" : "1234567" ,
+      "confirmedpass" : "1234567"
+    }
+  }
+
+}
