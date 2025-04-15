@@ -9,11 +9,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
 
 public class E2ETest {
@@ -63,7 +65,9 @@ public class E2ETest {
     }
 
     @AfterMethod
-    public void close() {
+    public void close(ITestResult result) throws IOException {
+        if(ITestResult.FAILURE == result.getStatus())
+            new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
         driver.quit();
     }
 }
