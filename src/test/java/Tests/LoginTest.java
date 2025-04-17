@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.P02_LoginPage;
 import TestData.DataProviders;
+import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,9 +19,13 @@ import java.time.Duration;
 
 public class LoginTest {
     private WebDriver driver;
+    long startTime;
+    long endTime;
 
     @BeforeMethod
     public void setup() {
+        startTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case started");
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/login");
         driver.manage().window().maximize();
@@ -60,6 +65,9 @@ public class LoginTest {
 
     @AfterMethod
     public void close(ITestResult result) throws IOException {
+        endTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case ended");
+        LogsUtils.logger.info("Test duration: " + (endTime - startTime) + "ms");
         if(ITestResult.FAILURE == result.getStatus())
             new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
         driver.quit();

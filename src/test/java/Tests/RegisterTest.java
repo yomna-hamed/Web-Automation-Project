@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.P01_RegisterPage;
 import TestData.DataProviders;
+import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
@@ -20,9 +21,13 @@ import java.time.Duration;
 public class RegisterTest {
     private WebDriver driver;
     private String email = new Faker().internet().emailAddress();
+    long startTime;
+    long endTime;
 
     @BeforeMethod
     public void setup() {
+        startTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case started");
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/register");
         driver.manage().window().maximize();
@@ -40,6 +45,7 @@ public class RegisterTest {
                 .clickRegisterButton();
 
         new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(P01_RegisterPage.registerComplete));
+
 
         Assert.assertEquals(driver.getCurrentUrl(),"https://demowebshop.tricentis.com/registerresult/1");
         System.out.println(email+" "+password);
@@ -97,6 +103,9 @@ public class RegisterTest {
 
     @AfterMethod
     public void close(ITestResult result) throws IOException {
+        endTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case ended");
+        LogsUtils.logger.info("Test duration: " + (endTime - startTime) + "ms");
         if(ITestResult.FAILURE == result.getStatus())
             new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
         driver.quit();

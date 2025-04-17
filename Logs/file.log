@@ -1,0 +1,10 @@
+2025-04-16 22:25:35,145 [main] [INFO] Tests.E2ETest.setup(E2ETest.java:31) - Test case started
+2025-04-16 22:26:00,435 [main] [INFO] Tests.E2ETest.setup(E2ETest.java:31) - Test duration: 25761ms
+2025-04-16 22:26:00,435 [main] [INFO] Tests.E2ETest.setup(E2ETest.java:31) - Test case ended
+2025-04-16 22:26:32,378 [main] [INFO] Tests.E2ETest.setup(E2ETest.java:31) - Test case started
+2025-04-16 22:26:54,695 [main] [INFO] Tests.E2ETest.setup(E2ETest.java:31) - Test duration: 22644ms
+2025-04-16 22:26:54,695 [main] [INFO] Tests.E2ETest.setup(E2ETest.java:31) - Test case ended
+2025-04-17 00:06:21,934 [main] [INFO] Tests.ShoppingCartTest.setup(ShoppingCartTest.java:31) - Test case started
+2025-04-17 00:07:38,836 [main] [INFO] Tests.ShoppingCartTest.setup(ShoppingCartTest.java:31) - Test case started
+2025-04-17 00:07:51,475 [main] [INFO] Tests.ShoppingCartTest.setup(ShoppingCartTest.java:31) - Test case ended
+2025-04-17 00:07:51,477 [main] [INFO] Tests.ShoppingCartTest.setup(ShoppingCartTest.java:31) - Test duration: 12987ms

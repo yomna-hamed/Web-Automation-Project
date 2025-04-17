@@ -4,6 +4,7 @@ import Pages.P02_LoginPage;
 import Pages.P03_HomePage;
 import Pages.P04_ShoppingCartPage;
 import TestData.DataProviders;
+import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,9 +22,13 @@ import java.time.Duration;
 
 public class ShoppingCartTest {
     private WebDriver driver;
+    long startTime;
+    long endTime;
 
     @BeforeMethod
     public void setup() {
+        startTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case started");
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/");
         driver.manage().window().maximize();
@@ -45,8 +50,6 @@ public class ShoppingCartTest {
         new P04_ShoppingCartPage(driver).goToShoppingCartPage()
                 .clickOnRemoveProductCheckBox()
                 .clickOnupdateShoppingCartButton();
-
-        new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.invisibilityOfElementLocated(P04_ShoppingCartPage.removeProductCheckBox));
 
         String  cartQuantityTextAfterRemoveProduct = driver.findElement(P03_HomePage.cartQuantity).getText();
         cartQuantityTextAfterRemoveProduct = cartQuantityTextAfterRemoveProduct.replaceAll("[^0-9-]", "");
@@ -123,11 +126,15 @@ public class ShoppingCartTest {
         boolean isVisible = new WebDriverWait(driver,Duration.ofSeconds(2)).until(ExpectedConditions.not(ExpectedConditions.invisibilityOfElementLocated(P04_ShoppingCartPage.acceptTermsAlert)));
 
         Assert.assertNotEquals(driver.getCurrentUrl(),"https://demowebshop.tricentis.com/onepagecheckout");
+
         Assert.assertTrue(isVisible);
     }
 
     @AfterMethod
     public void close(ITestResult result) throws IOException {
+        endTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case ended");
+        LogsUtils.logger.info("Test duration: " + (endTime - startTime) + "ms");
         if(ITestResult.FAILURE == result.getStatus())
             new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
         driver.quit();

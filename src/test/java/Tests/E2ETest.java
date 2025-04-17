@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.*;
 import TestData.DataProviders;
+import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
@@ -21,9 +22,13 @@ import java.time.Duration;
 public class E2ETest {
     private WebDriver driver;
     private String email = new Faker().internet().emailAddress();
+    long startTime;
+    long endTime;
 
     @BeforeMethod
     public void setup() {
+        startTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case started");
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -32,15 +37,6 @@ public class E2ETest {
 
     @Test //(dataProvider = "checkOutPageInfoProvider",dataProviderClass = DataProviders.class)
     public void EndToEndScenarioTC() throws FileNotFoundException {
-        /*new P01_RegisterPage(driver).goToHomePage()
-                .chooseGender("f")
-                .enterFirstName(DataProviders.getE2EScenarioData("RegisterData","RegisterData.validInputsForRegisterTC.firstname"))
-                .enterLastName(DataProviders.getE2EScenarioData("RegisterData","RegisterData.validInputsForRegisterTC.lastname"))
-                .enterEmail(email)
-                .enterPassword(DataProviders.getE2EScenarioData("RegisterData","RegisterData.validInputsForRegisterTC.password"))
-                .enterConfirmPassword(DataProviders.getE2EScenarioData("RegisterData","RegisterData.validInputsForRegisterTC.confirmedpass"))
-                .clickRegisterButton();*/
-
         new P02_LoginPage(driver).clickOnLoginPage()
                 .enterEmail(DataProviders.getE2EScenarioData("RegisterCredentials","email"))
                 .enterPassword(DataProviders.getE2EScenarioData("RegisterCredentials","password"))
@@ -66,6 +62,9 @@ public class E2ETest {
 
     @AfterMethod
     public void close(ITestResult result) throws IOException {
+        endTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case ended");
+        LogsUtils.logger.info("Test duration: " + (endTime - startTime) + "ms");
         if(ITestResult.FAILURE == result.getStatus())
             new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
         driver.quit();

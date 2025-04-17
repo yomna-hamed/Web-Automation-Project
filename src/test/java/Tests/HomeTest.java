@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.P03_HomePage;
 import TestData.DataProviders;
+import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,9 +26,13 @@ import java.util.List;
 public class HomeTest {
     private WebDriver driver;
     String homeURL = "https://demowebshop.tricentis.com/";
+    long startTime;
+    long endTime;
 
     @BeforeMethod
     public void setup() {
+        startTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case started");
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/");
         driver.manage().window().maximize();
@@ -199,6 +204,9 @@ public class HomeTest {
 
     @AfterMethod
     public void close(ITestResult result) throws IOException {
+        endTime = System.currentTimeMillis();
+        LogsUtils.logger.info("Test case ended");
+        LogsUtils.logger.info("Test duration: " + (endTime - startTime) + "ms");
         if(ITestResult.FAILURE == result.getStatus())
             new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
         driver.quit();
