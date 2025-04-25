@@ -1,0 +1,1 @@
+{"uuid":"1ec7862b-559e-4db4-a47d-60d6834d6ceb","name":"Tests.E2ETest.close","children":["7d8e657a-09ea-46b0-9b6f-b88f57ff0c8f"],"description":"","befores":[],"afters":[{"name":"close","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1745602626759,"stop":1745602626921}],"start":1745602626759,"stop":1745602626921}
