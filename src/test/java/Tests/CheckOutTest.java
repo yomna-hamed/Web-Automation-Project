@@ -39,7 +39,7 @@ public class CheckOutTest {
     @BeforeMethod
     public void setup() throws FileNotFoundException {
         startTime = System.currentTimeMillis();
-        LogsUtils.logger.info("Test case started");
+        LogsUtils.logger().info("Test case started");
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -170,10 +170,9 @@ public class CheckOutTest {
     @AfterMethod
     public void close(ITestResult result) throws IOException {
         endTime = System.currentTimeMillis();
-        LogsUtils.logger.info("Test case ended");
-        LogsUtils.logger.info("Test duration: " + (endTime - startTime) + "ms");
-        if(ITestResult.FAILURE == result.getStatus())
-            new SomeHelperFunctions(driver).takeScreenShot("ScreenShot On Failure");
+        LogsUtils.logger().info("Test case ended");
+        LogsUtils.logger().info("Test duration: " + (endTime - startTime) + "ms");
+        new SomeHelperFunctions(driver).takeScreenShot("Final view of "+ result.getMethod().getMethodName());
         driver.quit();
     }
 }
