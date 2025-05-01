@@ -7,6 +7,7 @@ import Pages.P05_CheckOutPage;
 import TestData.DataProviders;
 import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
+import drivers.DriverFactory;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,10 +41,9 @@ public class CheckOutTest {
     public void setup() throws FileNotFoundException {
         startTime = System.currentTimeMillis();
         LogsUtils.logger().info("Test case started");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(DriverFactory.setOptions());
         driver.get("https://demowebshop.tricentis.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         new P02_LoginPage(driver).clickOnLoginPage()
                 .enterEmail(DataProviders.getLoginDataFunction("email"))
                 .enterPassword(DataProviders.getLoginDataFunction("password"))

@@ -5,6 +5,7 @@ import TestData.DataProviders;
 import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
 import com.github.javafaker.Faker;
+import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,9 +29,8 @@ public class RegisterTest {
     public void setup() {
         startTime = System.currentTimeMillis();
         LogsUtils.logger().info("Test case started");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(DriverFactory.setOptions());
         driver.get("https://demowebshop.tricentis.com/register");
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 

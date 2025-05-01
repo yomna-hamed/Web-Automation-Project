@@ -4,6 +4,7 @@ import Pages.P03_HomePage;
 import TestData.DataProviders;
 import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
+import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,7 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,9 +33,8 @@ public class HomeTest {
     public void setup() {
         startTime = System.currentTimeMillis();
         LogsUtils.logger().info("Test case started");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(DriverFactory.setOptions());
         driver.get("https://demowebshop.tricentis.com/");
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
@@ -192,7 +191,7 @@ public class HomeTest {
         new P03_HomePage(driver).selectCategory("apparel-shoes")
                 .enterSearchText(DataProviders.getSearchText("SearchText","non-existed-Text"));
 
-        new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(P03_HomePage.searchKeyWord));
+        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(P03_HomePage.searchKeyWord));
 
         List<WebElement> displayedProducts = driver.findElements(P03_HomePage.productsBox);
 

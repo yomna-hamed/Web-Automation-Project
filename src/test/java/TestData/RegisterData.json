@@ -1,8 +1,8 @@
 { "RegisterData" :
   {
     "validInputsForRegisterTC" : {
-      "firstname" : "Yomna",
-      "lastname" : "Hamed" ,
+      "firstname" : "Mohamed",
+      "lastname" : "Ali" ,
       "password" : "1234567" ,
       "confirmedpass" : "1234567"
     },

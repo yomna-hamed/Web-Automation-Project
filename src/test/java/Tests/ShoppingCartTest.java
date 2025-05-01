@@ -6,8 +6,8 @@ import Pages.P04_ShoppingCartPage;
 import TestData.DataProviders;
 import Utilities.LogsUtils;
 import Utilities.SomeHelperFunctions;
+import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,9 +29,8 @@ public class ShoppingCartTest {
     public void setup() {
         startTime = System.currentTimeMillis();
         LogsUtils.logger().info("Test case started");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(DriverFactory.setOptions());
         driver.get("https://demowebshop.tricentis.com/");
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 

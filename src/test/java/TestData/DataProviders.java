@@ -39,23 +39,6 @@ public class DataProviders {
         };
     }
 
-    public static String getE2EScenarioData(String fileName,String key) throws FileNotFoundException {
-        FileReader reader = new FileReader("D:\\AutomationCourse\\WebAutomationProject\\src\\test\\java\\TestData\\"+fileName+".json");
-        JsonObject E2EScenarioData = JsonParser.parseReader(reader).getAsJsonObject();
-        String[] keys = key.split("\\.");
-        JsonElement element = E2EScenarioData;
-
-        for (String k : keys) {
-            if (element.isJsonObject()) {
-                element = element.getAsJsonObject().get(k);
-            } else {
-                return null;
-            }
-        }
-
-        return element.getAsString();
-    }
-
     public static String getLoginDataFunction(String key) throws FileNotFoundException {
         FileReader reader = new FileReader("D:\\AutomationCourse\\WebAutomationProject\\src\\test\\java\\TestData\\RegisterCredentials.json");
         JsonObject loginData = JsonParser.parseReader(reader).getAsJsonObject();
